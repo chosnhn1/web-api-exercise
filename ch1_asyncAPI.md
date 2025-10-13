@@ -90,7 +90,7 @@ Promise.allSettled([
 function loadJSON(url){
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
-    request.addEventListener('load', event => {
+    request.addEventListener('load', event => {p
       try {
         resolve(JSON.parse(event.target.responseText));
       } catch (error) {
