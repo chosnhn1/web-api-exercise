@@ -1,0 +1,16 @@
+.ripple-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    background: white;
+    pointer-events: none;
+    transform-origin: center;
+    opacity: 0;
+    position: absolute;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
