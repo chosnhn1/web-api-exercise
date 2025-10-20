@@ -6,7 +6,7 @@ button.addEventListener('click', async event => {
   const ripple = document.createElement('div');
   ripple.className = 'ripple';
 
-  const rippleSize = Math.max(button.offwetWidth, button.offsetHeight);
+  const rippleSize = Math.max(button.offsetWidth, button.offsetHeight);
   ripple.style.width = `${rippleSize}px`;
   ripple.style.height = `${rippleSize}px`;
 
