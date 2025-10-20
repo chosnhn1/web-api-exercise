@@ -1,0 +1,8 @@
+.scroll-progress {
+    height: 8px;
+    transform-origin: left;
+    position: sticky;
+    top: 0;
+    transform: scaleX(0);
+    background: blue;
+}
