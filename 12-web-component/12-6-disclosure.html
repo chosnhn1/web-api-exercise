@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* styling with :defined pseudo-class.
+    why?: 
+    
+    */
+    x-discloure:not(:defined) {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <x-disclosure>
+    <div slot="title">Blah blah</div>
+    <p>
+      This is a hidden, main article, and you can hide it with a click on title.
+    </p>
+  </x-disclosure>
+  <script src="12-6-disclosure.js"></script>
+</body>
+</html>
