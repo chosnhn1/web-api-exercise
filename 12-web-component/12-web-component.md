@@ -98,5 +98,11 @@ CSS `:host` selector: Shadow DOM을 자식으로 포함하는 엘리먼트인 "S
 * 토글 버튼
 * 컨텐츠 내용
 
+[사용 예시](./12-6-disclosure.html)
+
 ## 12.7 스타일이 적용된 버튼 컴포넌트 작성
+
+* default 기본형 버튼과 `primary`, `danger` 변형(variant)이 있는 버튼 요소 작성 예시
+
+[사용 예시](./12-7-button.html)
 
