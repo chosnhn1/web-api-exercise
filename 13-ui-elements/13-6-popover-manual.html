@@ -1,0 +1,10 @@
+<button type="button" id="trigger">Open Popover</button>
+<div popover="manual" id="greeting">Hello!</div>
+
+<script>
+  const trigger = document.querySelector('#trigger');
+  const popover = document.querySelector('#greeting');
+  trigger.addEventListener('click', () => {
+    popover.togglePopover();  // if you want to close manual popover, you should call hidePopover() or togglePopover()
+  });
+</script>

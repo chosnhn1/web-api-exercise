@@ -1,0 +1,18 @@
+<details>
+  <summary>Read more...</summary>
+  This is togglable content.
+</details>
+<br>
+<details open>
+  <summary>Read more...</summary>
+  This is togglable content, and given open attribute, content will start with open status.
+</details>
+<br>
+<details id="details">
+  <summary>Read more...</summary>
+  This content will be opened with script.
+</details>
+
+<script>
+  document.querySelector('#details').open = true;
+</script>

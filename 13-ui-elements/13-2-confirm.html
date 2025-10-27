@@ -1,0 +1,41 @@
+<dialog id="confirm">
+  <h2>Confirmation</h2>
+  <p>Are you sure?</p>
+
+  <button type="button" class="confirm-button">Confirm</button>
+  <button type="button" class="cancel-button">Cancel</button>
+</dialog>
+
+<button type="button" id="show-dialog">Show Confirm Dialog</button>
+
+<script>
+  const dialog = document.querySelector('#confirm');
+  const confirmButton = document.querySelector('.confirm-button');
+  const cancelButton = document.querySelector('.cancel-button');
+  const trigger = document.querySelector('#show-dialog');
+
+  confirmButton.addEventListener('click', () => {
+    dialog.close('confirm');
+  });
+  
+  cancelButton.addEventListener('click', () => {
+    dialog.close('cancel');
+  });
+
+  dialog.addEventListener('cancel', () => {
+    dialog.returnValue = 'cancel';
+  });
+
+  dialog.addEventListener('close', () => {
+    if (dialog.returnValue === 'confirm') {
+      console.log('Confirmation made.');
+    } else {
+      // nothing
+    }
+  });
+
+  trigger.addEventListener('click', () => {
+    dialog.showModal();
+  })
+
+</script>

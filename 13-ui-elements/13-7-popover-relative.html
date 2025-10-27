@@ -1,0 +1,25 @@
+<style>
+  .popover {
+    margin: 0;    /* remove margin first, because browser locate popover in middle of viewport by margin */
+    margin-top: 1em;
+    position: absolute;
+  }
+</style>
+<button type="button" class="trigger" popovertarget="popover">Open Popover</button>
+<div popover class="popover" id="popover">This is popover content connected to the button.</div>
+<p>Other content, blah blah.</p>
+
+<script>
+  const trigger = document.querySelector('.trigger');
+  const popover = document.querySelector('.popover');
+
+  popover.addEventListener('toggle', event => {
+    if (event.newState === 'open') {
+      const triggerRect = trigger.getBoundingClientRect();
+
+      // update popover location 
+      popover.style.top = `${triggerRect.bottom + window.scrollY}px`;
+      popover.style.left = `${triggerRect.left}px`
+    }
+  });
+</script>

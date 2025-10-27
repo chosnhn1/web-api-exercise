@@ -1,0 +1,40 @@
+<style>
+  #tooltip {
+    margin: 0;
+    margin-top: 1em;
+    position: absolute;
+  }
+</style>
+<button type="button" id="trigger">Please hover mouse here.</button>
+<div id="tooltip" popover="manual" role="tooltip">Tooltip content goes on here.</div>
+
+<script>
+  const button = document.querySelector('#trigger');
+  const tooltip = document.querySelector('#tooltip');
+
+  function showTooltip() {
+    const triggerRect = button.getBoundingClientRect();
+    tooltip.style.top = `${triggerRect.bottom + window.scrollY}px`;
+    tooltip.style.left = `${triggerRect.left}px`;
+    tooltip.showPopover();
+  }
+
+  // toggle tooltip with mouse control:
+  button.addEventListener('mouseover', () => {
+    showTooltip();
+  });
+  
+  button.addEventListener('mouseout', () => {
+    tooltip.hidePopover();
+  });
+  
+  // for keyboard: 
+  button.addEventListener('focus', () => {
+    showTooltip();
+  });
+
+  button.addEventListener('blur', () => {
+    tooltip.hidePopover();
+  });
+
+</script>

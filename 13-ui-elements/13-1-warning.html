@@ -1,0 +1,28 @@
+<style>
+  /* You can set up backdrop style */
+  #alert::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+  }
+</style>
+
+<dialog id="alert">
+  <h2>Warning</h2>
+  <p>This is a warning window.</p>
+  <button type="button" id="ok-button">Confirm</button>
+</dialog>
+
+<button type="button" id="show-dialog">Show Dialog</button>
+
+<script>
+  const dialog = document.querySelector('#alert');
+  const okButton = document.querySelector('#ok-button');
+  const trigger = document.querySelector('#show-dialog');
+
+  okButton.addEventListener('click', () => {
+    dialog.close();
+  });
+
+  trigger.addEventListener('click', () => {
+    dialog.showModal();
+  });
+</script>
