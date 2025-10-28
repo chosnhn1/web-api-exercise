@@ -1,0 +1,29 @@
+<ul>
+  <span id="availability"></span>
+  <li>Battery charge percentage: <span id="battery-level">--</span></li>
+  <li>Battery charge status: <span id="battery-charging">--</span></li>
+</ul>
+
+<script>
+  const availabilityItem = document.querySelector('#availability');
+  const batteryLevelItem = document.querySelector('#battery-level');
+  const batteryChargingItem = document.querySelector('#battery-charging');
+
+  if ('getBattery' in navigator) {
+    navigator.getBattery().then(battery => {
+      batteryLevelItem.textContent = `${battery.level * 100}%`;
+      batteryChargingItem.textContent = battery.charging ? 'battery charging' : 'battery not charging';
+      
+      battery.addEventListener('levelchange', () => {
+        batteryLevelItem.textContent = `${battery.level * 100}%`;
+      })
+      battery.addEventListener('chargingchange', () => {
+        batteryChargingItem.textContent = battery.charging ? 'battery charging' : 'battery not charging';
+      })
+    });
+
+  } else {
+    availabilityItem.textContent = "Battery API is not available on this browser.";
+    console.log('Battery API not available.')
+  }
+</script>

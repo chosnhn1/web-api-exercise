@@ -1,0 +1,21 @@
+<ul>
+  <span id="message"></span>
+  <li>Latitude: <span id="latitude"></span></li>
+  <li>Longitude: <span id="longitude"></span></li>
+</ul>
+
+<script>
+  const messageItem = document.querySelector('#message');
+  const latitudeItem = document.querySelector('#latitude');
+  const longitudeItem = document.querySelector('#longitude');
+
+  navigator.geolocation.getCurrentPosition(position => {
+    console.log('latitude: ' + position.coords.latitude);
+    console.log('longitude: ' + position.coords.longitude);
+    latitudeItem.textContent = position.coords.latitude;
+    longitudeItem.textContent = position.coords.longitude;
+  }, error => {
+    console.log(error);
+    messageItem.textContent = "Error occurred.";
+  })
+</script>

@@ -77,3 +77,7 @@
 
 [활용 예시](./13-9-notification.js)
 
+"보안 컨텍스트"에서만 표시할 수 있음 (HTTPS, localhost etc.)
+
+`window.isSecureContext` 확인: [관련 문서 - Secure Contexts](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts)
+
