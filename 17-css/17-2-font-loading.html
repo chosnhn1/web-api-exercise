@@ -1,0 +1,21 @@
+<p class="text">
+  Hello!
+</p>
+
+<script>
+  const roboto = new FontFace(
+    'Roboto',
+    'url(https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TjASc6CsQ.woff2)', {
+      style: 'normal',
+      weight: 400
+    }
+  );
+
+  document.fonts.add(roboto);
+
+  roboto.load()
+  .then(() => {
+    console.log('Font loaded.')
+  });
+
+</script>

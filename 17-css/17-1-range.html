@@ -1,0 +1,30 @@
+<style>
+  ::highlight(highlight-range) {
+    background-color: #fef3c7;
+  }
+</style>
+
+<p id="text">
+  This is a sample text. In this example, we will use CSS custom highlighting API, and highlight text.
+</p>
+
+<script>
+  function getRange(textNode, textToHighlight) {
+    // start - end point of highlighting:
+    const startOffset = textNode.textContent.indexOf(textToHighlight);
+    const endOffset = startOffset + textToHighlight.length;
+
+    const range = new Range();
+    range.setStart(textNode, startOffset);
+    range.setEnd(textNode, endOffset);
+
+    return range;
+  };
+
+  const node = document.querySelector('#text');
+  const range = getRange(node.firstChild, 'highlight text');
+
+  const highlight = new Highlight(range);
+  CSS.highlights.set('highlight-range', highlight);
+
+</script>
