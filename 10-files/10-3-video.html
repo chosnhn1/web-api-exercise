@@ -1,0 +1,12 @@
+<input type="file" id="file-upload" accept="video/*">
+<video id="video-player" controls></video>
+<script>
+  const fileInput = document.querySelector('#file-upload');
+  const video = document.querySelector('#video-player');
+
+  fileInput.addEventListener('change', event => {
+    const [file] = fileInput.files;
+    const objectUrl = URL.createObjectURL(file);
+    video.src = objectUrl;
+  })
+</script>

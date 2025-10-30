@@ -21,11 +21,38 @@ if (navigator.connection.effectiveType === '4g') {
 
 [MDN 문서: Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
 
-
-
 ## 14. 4 지도에 기기 위치 표시
+
+구글 지도 API를 활용하는 예시: 
+
+```js
+const map = document.querySelector('#map');
+
+navigator.geolocation.getCurrentPosition(position => {
+  const { latitude, longitude } = position.coords;
+
+  const iframe = document.createElement('iframe');
+  iframe.width = 450;
+  iframe.height = 250;
+
+  const url = new URL('https://www.google.com/maps/embed/v1/place');
+  url.searchParams.append('key', 'GOOGLE_MAPS_API_KEY');
+  url.searchParams.append('q', `${latitude},${longitude}`);
+  iframe.src = url;
+
+  map.appendChild(iframe);
+})
+```
+
+* [구글 지도](https://mapsplatform.google.com/lp/maps-apis/)
+* [Mapbox](https://www.mapbox.com/)
+* [OpenStreetMap](https://www.openstreetmap.org/)
+
 ## 14. 5 텍스트 복사하고 붙여넣기
 
+[MDN 문서: Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API)
+
+[활용 예시](./14-5-clipboard.html)
 
 ## 14. 6 웹 공유 API를 사용한 콘텐츠 공유
 

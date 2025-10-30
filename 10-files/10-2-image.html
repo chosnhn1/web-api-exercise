@@ -1,0 +1,25 @@
+<input type="file" id="select-file" accept="image/*">
+<img id="placeholder-img">
+<script>
+  function showImageFile(file, imageElement) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', event => {
+      imageElement.src = event.target.result;
+    });
+
+    reader.addEventListener('error', event => {
+      console.log('error', event);
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  const fileInput = document.querySelector('#select-file');
+  fileInput.addEventListener('change', () => {
+    showImageFile(
+      fileInput.files[0],
+      document.querySelector('#placeholder-image')
+    );
+  });
+</script>

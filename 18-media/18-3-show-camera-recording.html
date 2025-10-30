@@ -1,0 +1,42 @@
+<video id="preview" muted></video>
+<button id="record-button">Record</button>
+<button id="stop-record-button">Stop</button>
+
+<script>
+  async function initiate() {
+    const preview = document.querySelector('#preview');
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true
+    });
+    preview.srcObject = stream;
+    preview.play();
+  
+    mediaRecorder = new MediaRecorder(stream, {
+      mimeType: 'video/webm'
+    });
+  
+    mediaRecorder.addEventListener('dataavailable', event => {
+      const blob = new Blob([event.data], {
+        type: 'video/webm'
+      });
+  
+      const url = URL.createObjectURL(blob);
+      preview.srcObject = null;
+      preview.src = url;
+  
+      preview.autoplay = true;
+      preview.loop = true;
+      preview.controls = true;
+    });
+  
+      document.querySelector('#record-button').addEventListener('click', () => {
+        mediaRecorder.start();
+      });
+      document.querySelector('#stop-record-button').addEventListener('click', () => {
+        mediaRecorder.stop();
+      });
+  }
+
+  initiate();
+</script>

@@ -1,0 +1,40 @@
+<textarea id="textarea"></textarea>
+<button id="copy-button">Copy</button>
+<button id="paste-button">Paste</button>
+<script>
+  const textarea = document.querySelector('#textarea');
+
+  async function copySelection() {
+    const { selectionStart, selectionEnd } = textarea;
+    const selectedText = textarea.value.slice(selectionStart, selectionEnd);
+    
+    try {
+      await navigator.clipboard.writeText(selectedText);
+    } catch {
+      console.error('Clipboard Error: ', error);
+    }
+  }
+  
+  async function pasteToSelection(textarea) {
+    const currentValue = textarea.value;
+    const { selectionStart, selectionEnd } = textarea;
+    
+    try {
+      const clipboardValue = await navigator.clipboard.readText();
+      const newValue = currentValue.slice(0, selectionStart) + clipboardValue + currentValue.slice(selectionEnd);
+      textarea.value = newValue;
+    } catch {
+      console.error('Clipboard Error: ', error);
+    }
+  }
+
+  copyButton = document.querySelector('#copy-button');
+  pasteButton = document.querySelector('#paste-button');
+  copyButton.addEventListener('click', () => {
+    copySelection();
+  });
+
+  pasteButton.addEventListener('click', () => {
+    pasteToSelection(textarea);
+  });
+</script>
