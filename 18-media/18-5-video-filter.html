@@ -1,0 +1,36 @@
+<style>
+  #canvas {
+    filter: hue-rotate(90deg);
+  }
+</style>
+<canvas id="canvas"></canvas>
+<video id="preview" style="display: none;"></video>
+<button type="button" id="trigger">Start</button>
+<script>
+  async function startCamera() {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    });
+
+    const preview = document.getElementById('preview');
+    preview.srcObject = stream;
+    preview.play();
+
+    const canvas = document.getElementById('canvas');
+    canvas.width = preview.videoWidth * window.devicePixelRatio;
+    canvas.height = preview.videoHeight * window.devicePixelRatio;
+
+    const context = canvas.getContext('2d');
+
+    setInterval(() => {
+      context.drawImage(preview, 0, 0, canvas.width, canvas.height);
+    }, 1000 / 30);
+  }
+
+  const trigger = document.getElementById('trigger');
+  trigger.addEventListener('click', () => {
+    startCamera();
+  });
+
+</script>

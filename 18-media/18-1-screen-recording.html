@@ -1,0 +1,50 @@
+<h2>Screen Recording Example</h2>
+<video src="" id="video" width="640" height="480"></video>
+<button type="button" id="trigger">Start Recording</button>
+<script>
+  const video = document.querySelector('#video');
+  const trigger = document.querySelector('#trigger');
+
+  async function captureScreen() {
+    const stream = await navigator.mediaDevices.getDisplayMedia();
+    const mediaRecorder = new MediaRecorder(stream, {
+      mimeType: 'video/webm'
+    });
+
+    mediaRecorder.addEventListener('dataavailable', event => {
+      const blob = new Blob([event.data], {
+        type: 'video/webm',
+      });
+
+      const url = URL.createObjectURL(blob);
+      video.src = url;
+    });
+
+    mediaRecorder.start();
+  }
+
+  trigger.addEventListener('click', () => {
+    captureScreen();
+  })
+
+  // sending blob to server example:
+  async function sendScreen(blob) {
+    const formData = new FormData();
+    formData.append('file', blob);
+
+    fetch('/api/video/upload', {
+      method: 'POST',
+      body: formData
+    });
+  }
+
+  // add download link for screencap example:
+  function addDownloadlink(url) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.textContent = 'Download';
+    link.download = 'screen-recording.webm';
+    link.click();
+  }
+
+</script>

@@ -1,0 +1,50 @@
+<div class="capabilities">
+  <span id="mp3-check">🔴</span>
+  <span id="opus-check">🔴</span>
+  <span id="webm-check">🔴</span>
+</div>
+<script>
+  const mp3Check = document.querySelector('#mp3-check');
+  const opusCheck = document.querySelector('#opus-check');
+  const webmCheck = document.querySelector('#webm-check');
+
+  navigator.mediaCapabilities.decodingInfo({
+    type: 'file',
+    audio: {
+      contentType: 'audio/mp3'
+    }
+  }).then(result => {
+    if (result.supported) {
+      // mp3 audio supported
+      mp3Check.textContent = '🟢';
+    }
+  });
+
+  navigator.mediaCapabilities.decodingInfo({
+    type: 'file',
+    audio: {
+      contentType: 'audio/webm;codecs=opus'
+    }
+  }).then(result => {
+    if (result.supported) {
+      // WebM audio with Opus codec supported
+      opusCheck.textContent = '🟢';
+    }
+  });
+
+  navigator.mediaCapabilities.decodingInfo({
+    type: 'file',
+    video: {
+      contentType: 'video/webm;codecs=vp8',
+      bitrate: 4000000, // 4MB
+      framerate: 30,
+      width: 1920,
+      height: 1080
+    }
+  }).then(result => {
+    if (result.supported) {
+      // WebM supported.
+      webmCheck.textContent = '🟢';
+    }
+  });
+</script>

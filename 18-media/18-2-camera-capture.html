@@ -1,0 +1,41 @@
+<style>
+  #canvas {
+    display: none;
+  }
+
+  #photo {
+    width: 640px;
+    height: 480px;
+  }
+</style>
+<canvas id="canvas"></canvas>
+<img id="photo">
+<video id="preview"></video>
+<script>
+  const preview = document.querySelector('#preview');
+  const photo = document.querySelector('#photo');
+  const canvas = document.querySelector('#canvas');
+  async function startCamera() {
+    const stream = await navigator.mediaDevices.getUserMedia(
+      {
+        video: true,
+        audio: false
+      }
+    );
+
+    preview.srcObject = stream;
+    preview.play();
+  }
+
+  function captureImage() {
+    canvas.width = canvas.width * window.devicePixelRatio;
+    canvas.height = canvas.height * window.devicePixelRatio;
+
+    const context = canvas.getContext('2d');
+    context.drawImage(preview, 0, 0, canvas.width, canvas.height);
+
+    const dataUrl = canvas.toDataURL('image/jpeg');
+    photo.src = dataUrl;
+  }
+
+</script>
