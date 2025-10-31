@@ -1,0 +1,42 @@
+<label id="drop-target">
+  <div>Drag image to here</div>
+  <input type="file" id="file-input">
+</label>
+<img id="placeholder">
+<script>
+  // read file and show image to page:
+  function showDroppedFile(file) {
+    const reader = new FileReader();
+    reader.addEventListener('load', event => {
+      const image = document.querySelector('#placeholder');
+      image.src = event.target.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  // "drag file here" portion:
+  const target = document.querySelector('#drop-target');
+  target.addEventListener('drop', event => {
+    event.preventDefault(); // if not, page will be substituted with file
+    const [item] = event.dataTransfer.items;
+
+    const file = item.getAsFile();
+    if (file.type.startsWith('image/')) {
+      showDroppedFile(file);
+    }
+  });
+
+  // 
+  target.addEventListener('dragover', event => {
+    event.preventDefault(); // also prevent this
+  });
+
+  // file input element:
+  const fileInput = document.querySelector('#file-input');
+  fileInput.addEventListener('change', () => {
+    const [file] = fileInput.files;
+    showDroppedFile(file);
+  });
+
+</script>

@@ -1,0 +1,27 @@
+<a id="export-link" download="users.json">Export user data</a>
+<script>
+  function renderUsers(users) {
+    // 
+  }
+
+  const exportLink = document.querySelector('#export-link');
+  async function getUserData() {
+    const response = await fetch('/api/users');
+    const users = await response.json();
+
+    // render user data into UI: 
+    renderUsers(users);
+    const currentUrl = exportLink.href;
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+    }
+
+    const blob = new Blob([JSON.stringify(users, null, 2)], {
+      type: 'application/json'
+    });
+
+    const url = URL.createObjectURL(blob);
+    exportLink.href = url;
+    
+  }
+</script>

@@ -1,0 +1,36 @@
+<script>
+  async function selectOutputFile() {
+    // check availability
+    if (!('showSaveFilePicker' in window)) {
+      return null;
+    }
+
+    try {
+      return window.showSaveFilePicker({
+        suggestedName: 'users.json',
+        types: [
+          { description: "JSON", accept: { "application/json": [".json"] } }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+
+    async function exportData(data) {
+      const outputFile = await selectOutputFile();
+      if (outputFile) {
+        try {
+          const stream = await outputFile.createWritable();
+          await stream.write(JSON.stringify(data, null, 2));
+          await stream.close();
+
+          document.querySelector('#export-success').classList.remove('d-none');
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+    
+  }
+</script>
