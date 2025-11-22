@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <div id="dashboard">
+    <span>Username: </span><span id="username"></span>
+    <br>
+    <span id="items">Items: </span>
+  </div>
+</head>
+<body>
+  <script>
+    function fetchUser() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("User data loaded.");
+          resolve({
+            id: 1,
+            name: "John"
+          });
+        }, 1000); // Simulate 1s of server response delay
+      });
+    }
+    
+    function fetchProducts() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log("Product data loaded.");
+          resolve([
+            {id: 101, name: "Laptop"},
+            {id: 102, name: "Mouse"}
+          ]);
+        }, 2000);  // Simulate 2s of server response delay
+      });
+    }
+
+    console.time("load time");
+    Promise.all([
+      fetchUser(),
+      fetchProducts()
+    ]).then(([userData, productData]) => {
+      console.log("User: ", userData);
+      document.querySelector('#username').textContent = userData.name;
+
+      console.log("Product: ", productData);
+      const items = document.querySelector('#items')
+      productData.forEach((item) => {
+        const itemName = document.createElement('span');
+        itemName.textContent = item.name + " ";
+        items.appendChild(itemName)
+      });
+
+      console.timeEnd("load time");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  </script>
+</body>
+</html>

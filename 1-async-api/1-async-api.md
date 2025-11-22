@@ -11,11 +11,16 @@ Event를 listening(청취)
 
 EventTarget - addEventListener / removeEventListener
 
-
 ## `Promise`
 
 비동기 동작의 최종 결과를 나타내는 객체
 event listening을 대체
+
+* 관련 MDN 문서
+  * [JS Guide: Using Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+  * [Global Object: Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+* "Callback Hell" & Promise Chain
+  * Promise를 사용하지 않았을 때 발생할 수 있는 가독성 이슈와 그에 대한 Promise의 해결법
 
 ### Promise와 Event Handler의 차이
 
